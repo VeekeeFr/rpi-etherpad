@@ -5,9 +5,9 @@ MAINTAINER Veekee
 # Mainly based on tvelocity/etherpad-lite
 # Parts from http://node-arm.herokuapp.com/
 
-RUN apt-get update && apt-get upgrade && \
-    apt-get install -y vim curl unzip mysql-client curl wget python-dev libssl-dev pkg-config build-essential && \
-    rm -r /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get upgrade
+RUN apt-get install -y vim curl unzip mysql-client wget python-dev libssl-dev pkg-config build-essential
 
 WORKDIR /opt
 
