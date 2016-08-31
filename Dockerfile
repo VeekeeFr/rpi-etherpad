@@ -36,5 +36,5 @@ RUN ln -s var/settings.json settings.json
 
 EXPOSE 9001
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["bin/run.sh", "--root"]
+CMD ["bin/safeRun.sh", "--root"]
 
