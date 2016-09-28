@@ -1,13 +1,16 @@
 # Pull base image
-FROM resin/rpi-raspbian:jessie
+FROM resin/rpi-raspbian:latest
 MAINTAINER Veekee
+
+ENV LANG C.UTF-8
+ENV TZ Europe/Paris
 
 # Mainly based on tvelocity/etherpad-lite
 # Parts from http://node-arm.herokuapp.com/
 
 RUN apt-get -qq update
 RUN apt-get upgrade
-RUN apt-get install -y vim curl unzip mysql-client wget python-dev libssl-dev pkg-config build-essential
+RUN apt-get install -y --no-install-recommends vim curl unzip mysql-client wget python-dev libssl-dev pkg-config build-essential
 RUN rm -r /var/lib/apt/lists/*
 
 WORKDIR /opt
@@ -32,10 +35,11 @@ COPY entrypoint.sh /entrypoint.sh
 RUN sed -i 's/^node/exec\ node/' bin/run.sh
 
 VOLUME /opt/etherpad-lite/var
+VOLUME /var/log/etherpad-lite
 
 RUN ln -s var/settings.json settings.json
 
 EXPOSE 9001
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["bin/safeRun.sh", "--root"]
+CMD ["bin/safeRun.sh", "/var/log/etherpad-lite/etherpad-service.log"]
 
