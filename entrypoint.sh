@@ -45,6 +45,7 @@ fi
 
 if [ ! -f settings.json ]; then
 
+	echo "Creating default etherpad settings"
 	cat <<- EOF > settings.json
 	{
 	  "title": "${ETHERPAD_TITLE}",
